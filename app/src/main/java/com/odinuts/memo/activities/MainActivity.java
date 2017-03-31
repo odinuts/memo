@@ -31,10 +31,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
         mRealm = Realm.getDefaultInstance();
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setUpRecyclerView();
 
@@ -61,7 +63,8 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new MyRecyclerViewAdapter(mRealm.where(Parent.class).findFirst().getNoteList());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL_LIST));
 
         TouchHelperCallback touchHelperCallback = new TouchHelperCallback();
         ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
@@ -91,5 +94,4 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-
 }
