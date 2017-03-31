@@ -26,6 +26,7 @@ public class TakeNote extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+
                     NotesHelper.addItemAsync(mRealm);
                     return true;
                 }
