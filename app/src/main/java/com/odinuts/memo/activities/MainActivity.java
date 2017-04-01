@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
-import android.widget.TextView;
 
 import com.odinuts.memo.R;
 import com.odinuts.memo.adapters.DividerItemDecoration;
@@ -22,7 +21,6 @@ import io.realm.Realm;
 public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private FloatingActionButton mFab;
-    private TextView mTextView;
     private RecyclerView mRecyclerView;
     private Realm mRealm;
     private MyRecyclerViewAdapter mAdapter;
@@ -39,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         setUpRecyclerView();
-
-        mTextView = (TextView) findViewById(R.id.text_view);
 
         mFab = (FloatingActionButton) findViewById(R.id.add_fab);
         mFab.setOnClickListener(new View.OnClickListener() {

@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import io.realm.OrderedRealmCollection;
+import io.realm.RealmRecyclerViewAdapter;
 
 public class MyRecyclerViewAdapter extends
         RealmRecyclerViewAdapter<Note, MyRecyclerViewAdapter.MyViewHolder> {
@@ -48,7 +49,7 @@ public class MyRecyclerViewAdapter extends
     public void onBindViewHolder(MyViewHolder holder, int position) {
         final Note obj = getItem(position);
         holder.data = obj;
-        holder.title.setText(obj.getNote());
+        holder.noteText.setText(obj.getNote());
     }
 
     @Override
@@ -57,12 +58,12 @@ public class MyRecyclerViewAdapter extends
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView title;
         public Note data;
+        TextView noteText;
 
         MyViewHolder(View view) {
             super(view);
-            title = (TextView) view.findViewById(R.id.text_view);
+            noteText = (TextView) view.findViewById(R.id.text_view);
         }
     }
 }

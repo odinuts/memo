@@ -6,24 +6,8 @@ import io.realm.Realm;
 
 public class NotesHelper {
 
-    public static void randomAddItemAsync(Realm realm) {
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                for (int i = 0; i < 3; i++) {
-                    Note.create(realm);
-                }
-            }
-        });
-    }
-
-    public static void addItemAsync(Realm realm) {
-        realm.executeTransactionAsync(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                Note.create(realm);
-            }
-        });
+    public static void addItemAsync(Realm realm, final String note) {
+        Note.create(realm, note);
     }
 
     public static void deleteItemAsync(Realm realm, final long id) {
