@@ -29,7 +29,6 @@ public class TakeNote extends AppCompatActivity {
 
         mRealm = Realm.getDefaultInstance();
         mEditText = (EditText) findViewById(R.id.edit_text);
-        noteText = mEditText.getText().toString();
 //        mEditText.setOnKeyListener(new View.OnKeyListener() {
 //            @Override
 //            public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -55,7 +54,7 @@ public class TakeNote extends AppCompatActivity {
         int id = item.getItemId();
         switch (id) {
             case R.id.action_add:
-                NotesHelper.addItemAsync(mRealm, noteText);
+                NotesHelper.addItemAsync(mRealm, mEditText.getText().toString());
                 Log.d("ADD", "Here");
                 return true;
             default:

@@ -21,8 +21,8 @@ public class Note extends RealmObject {
         realm.beginTransaction();
         Note note = realm.createObject(Note.class, increment());
         note.setNote(noteText);
-        realm.commitTransaction();
         notes.add(note);
+        realm.commitTransaction();
     }
 
     static void delete(Realm realm, long id) {
