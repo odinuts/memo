@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Memo</string>
-    <string name="enter_note">Enter a note here.</string>
-    <string name="add">Add</string>
+    <string name="note_title_hint">Title</string>
+    <string name="note_desc_hint">Description</string>
+    <string name="add">Add note</string>
+    <string name="new_note">New note</string>
+    <string name="notes_list">Notes</string>
 </resources>

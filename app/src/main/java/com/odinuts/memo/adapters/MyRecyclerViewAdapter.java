@@ -9,33 +9,15 @@ import android.widget.TextView;
 import com.odinuts.memo.R;
 import com.odinuts.memo.model.Note;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import io.realm.OrderedRealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 
 public class MyRecyclerViewAdapter extends
         RealmRecyclerViewAdapter<Note, MyRecyclerViewAdapter.MyViewHolder> {
 
-    private boolean inDeletionMode = false;
-    private Set<Integer> notesToDelete = new HashSet<Integer>();
-
     public MyRecyclerViewAdapter(OrderedRealmCollection<Note> data) {
         super(data, true);
         setHasStableIds(true);
-    }
-
-    void enableDeletionMode(boolean enabled) {
-        inDeletionMode = enabled;
-        if (!enabled) {
-            notesToDelete.clear();
-        }
-        notifyDataSetChanged();
-    }
-
-    Set<Integer> getNotesToDelete() {
-        return notesToDelete;
     }
 
     @Override
@@ -47,9 +29,10 @@ public class MyRecyclerViewAdapter extends
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        final Note obj = getItem(position);
-        holder.data = obj;
-        holder.noteText.setText(obj.getNote());
+        final Note noteItem = getItem(position);
+        holder.note = noteItem;
+        holder.noteTitle.setText((noteItem.getTitle()));
+        holder.noteDescription.setText(noteItem.getDescription());
     }
 
     @Override
@@ -58,12 +41,14 @@ public class MyRecyclerViewAdapter extends
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {
-        public Note data;
-        TextView noteText;
+        public Note note;
+        public TextView noteTitle;
+        public TextView noteDescription;
 
         MyViewHolder(View view) {
             super(view);
-            noteText = (TextView) view.findViewById(R.id.text_view);
+            noteTitle = (TextView) view.findViewById(R.id.note_title_text_view);
+            noteDescription = (TextView) view.findViewById(R.id.note_desc_text_view);
         }
     }
 }

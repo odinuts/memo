@@ -1,11 +1,11 @@
 package com.odinuts.memo.activities;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 
 import com.odinuts.memo.R;
@@ -14,40 +14,34 @@ import com.odinuts.memo.model.NotesHelper;
 import io.realm.Realm;
 
 public class TakeNote extends AppCompatActivity {
-    private EditText mEditText;
-    private Realm mRealm;
-    private Menu mMenu;
-    private String noteText;
-    private Toolbar mToolbar;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_take_note);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolbar);
+        realm = Realm.getDefaultInstance();
 
-        mRealm = Realm.getDefaultInstance();
-        mEditText = (EditText) findViewById(R.id.edit_text);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.new_note);
+
+        final EditText title = (EditText) findViewById(R.id.title_edit_text);
+        final EditText desc = (EditText) findViewById(R.id.description_edit_text);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.add_note_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NotesHelper.addItem(realm, title.getText().toString(), desc.getText().toString());
+            }
+        });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        this.mMenu = menu;
-        getMenuInflater().inflate(R.menu.note_options, mMenu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_add:
-                NotesHelper.addItemAsync(mRealm, mEditText.getText().toString());
-                Log.d("ADD", "Here");
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    protected void onDestroy() {
+        super.onDestroy();
+        realm.close();
     }
 }
