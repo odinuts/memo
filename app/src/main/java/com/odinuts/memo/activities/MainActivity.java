@@ -21,7 +21,6 @@ import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
     private Realm realm;
-    private MyRecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
 
     @Override
@@ -56,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView() {
-        adapter = new MyRecyclerViewAdapter(realm.where(Parent.class).findFirst().getNoteList());
+        MyRecyclerViewAdapter adapter = new MyRecyclerViewAdapter(realm.where(Parent.class).findFirst().getNoteList());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         recyclerView.addItemDecoration(new DividerItemDecoration(this,

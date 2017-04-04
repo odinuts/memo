@@ -12,8 +12,8 @@ public class NotesHelper {
         Note note = realm.createObject(Note.class, System.currentTimeMillis());
         note.setTitle(title);
         note.setDescription(desc);
-        realm.commitTransaction();
         notesList.add(note);
+        realm.commitTransaction();
     }
 
     public static void deleteItem(Realm realm, long id) {
