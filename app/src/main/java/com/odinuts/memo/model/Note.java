@@ -4,7 +4,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class Note extends RealmObject {
-    public static final String FIELD_COUNT = "fc";
+    public static final String FIELD_COUNT = "id";
 
     @PrimaryKey
     private long id;
